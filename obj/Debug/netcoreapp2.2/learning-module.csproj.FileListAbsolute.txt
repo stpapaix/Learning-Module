@@ -1,0 +1,14 @@
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\learning-module.deps.json
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\learning-module.runtimeconfig.json
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\learning-module.runtimeconfig.dev.json
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\learning-module.dll
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\learning-module.pdb
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\obj\Debug\netcoreapp2.2\learning-module.csprojAssemblyReference.cache
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\obj\Debug\netcoreapp2.2\learning-module.csproj.CoreCompileInputs.cache
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\obj\Debug\netcoreapp2.2\learning-module.AssemblyInfoInputs.cache
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\obj\Debug\netcoreapp2.2\learning-module.AssemblyInfo.cs
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\obj\Debug\netcoreapp2.2\learning-module.dll
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\obj\Debug\netcoreapp2.2\learning-module.pdb
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\Microsoft.Azure.Documents.ServiceInterop.dll
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\Cosmos.CRTCompat.dll
+C:\Users\stpapaix\OneDrive - Microsoft\dev\vscode\learning-module\bin\Debug\netcoreapp2.2\learning-module.dll.config
