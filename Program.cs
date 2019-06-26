@@ -129,7 +129,7 @@ namespace learning_module
             Console.WriteLine("STOP After Soft Delete ...");
             Console.ReadKey();
 
-            // Hard Delete User
+            // Hard Delete UserS
             Console.WriteLine("STOP Before Hard Delete ...");            
             await this.DeleteUserDocument("Users", "WebCustomers", yanhe);
             await this.DeleteUserDocument("Users", "WebCustomers", nelapin);
