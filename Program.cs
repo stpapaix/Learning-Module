@@ -114,7 +114,7 @@ namespace learning_module
             await this.ReplaceUserDocument("Users", "WebCustomers", yanhe);
 
 
-            // Read a user from Collection where userId = "xxx"
+            // Read a user from Collection where userId = "xxxx"
             User myUser = await this.ReadUserDocument("Users", "WebCustomers", yanhe);
             this.WriteToConsoleAndPromptToContinue("Read user {0} - {1} {2} - sd: {3}", myUser.Id, myUser.FirstName, myUser.LastName, myUser.SDTag);
             User myUser2 = await this.ReadUserDocument("Users", "WebCustomers", nelapin);
