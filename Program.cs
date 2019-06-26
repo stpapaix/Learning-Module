@@ -32,6 +32,7 @@ namespace learning_module
             User yanhe = new User
             {
                 Id = "1",
+                ttl = -1,
                 UserId = "yanhe",
                 SDTag = "n",                
                 LastName = "He",
@@ -63,6 +64,7 @@ namespace learning_module
             User nelapin = new User
             {
                 Id = "2",
+                ttl = -1,
                 UserId = "nelapin",
                 SDTag = "n",
                 LastName = "Pindakova",
@@ -120,72 +122,29 @@ namespace learning_module
 
             
             // Soft Delete User
+            Console.WriteLine("STOP Before Soft Delete ...");
+            Console.ReadKey();
             nelapin.SDTag = "y";
-            await this.SoftDeleteUserDocument("Users", "WebCustomers", nelapin);
+            await this.SoftDeleteUserDocumentWithTTL("Users", "WebCustomers", nelapin, 60);
+            Console.WriteLine("STOP After Soft Delete ...");
+            Console.ReadKey();
 
             // Hard Delete User
+            Console.WriteLine("STOP Before Hard Delete ...");            
             await this.DeleteUserDocument("Users", "WebCustomers", yanhe);
+            await this.DeleteUserDocument("Users", "WebCustomers", nelapin);
+
 
 
             // Execute Request with LINK and SQL
-            this.ExecuteSimpleQuery("Users", "WebCustomers");
+            //this.ExecuteSimpleQuery("Users", "WebCustomers");
 
             // Call Store Procedure
-            await this.RunStoredProcedure("Users", "WebCustomers", yanhe);
+            //await this.RunStoredProcedure("Users", "WebCustomers", yanhe);
    
         }
 
-        public class User
-        {
-            [JsonProperty("id")]
-            public string Id { get; set; }
-            [JsonProperty("userId")]
-            public string UserId { get; set; }
-            [JsonProperty("sdTag")]
-            public string SDTag { get; set; }
-            [JsonProperty("lastName")]
-            public string LastName { get; set; }
-            [JsonProperty("firstName")]
-            public string FirstName { get; set; }
-            [JsonProperty("email")]
-            public string Email { get; set; }
-            [JsonProperty("dividend")]
-            public string Dividend { get; set; }
-            [JsonProperty("OrderHistory")]
-            public OrderHistory[] OrderHistory { get; set; }
-            [JsonProperty("ShippingPreference")]
-            public ShippingPreference[] ShippingPreference { get; set; }
-            [JsonProperty("CouponsUsed")]
-            public CouponsUsed[] Coupons { get; set; }
-            public override string ToString()
-            {
-                return JsonConvert.SerializeObject(this);
-            }
-        }
 
-        public class OrderHistory
-        {
-            public string OrderId { get; set; }
-            public string DateShipped { get; set; }
-            public string Total { get; set; }
-        }
-
-        public class ShippingPreference
-        {
-            public int Priority { get; set; }
-            public string AddressLine1 { get; set; }
-            public string AddressLine2 { get; set; }
-            public string City { get; set; }
-            public string State { get; set; }
-            public string ZipCode { get; set; }
-            public string Country { get; set; }
-        }
-
-        public class CouponsUsed
-        {
-            public string CouponCode { get; set; }
-
-        }
 
         private void WriteToConsoleAndPromptToContinue(string format, params object[] args)
         {
@@ -254,6 +213,7 @@ namespace learning_module
                 else
                 {
                     throw;
+
                 }
             }
         }
@@ -278,10 +238,11 @@ namespace learning_module
             }
         }
 
-        private async Task SoftDeleteUserDocument(string databaseName, string collectionName, User deletedUser)
+        private async Task SoftDeleteUserDocumentWithTTL(string databaseName, string collectionName, User deletedUser, int myTTLValue)
         {
            try
             {
+                deletedUser.ttl = myTTLValue;
                 await this.client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(databaseName, collectionName, deletedUser.Id), deletedUser, new RequestOptions { PartitionKey = new PartitionKey(deletedUser.UserId) });
                 this.WriteToConsoleAndPromptToContinue("Soft Delete user {0}", deletedUser.Id);
             }
@@ -361,4 +322,58 @@ namespace learning_module
                 }
         }
     }
+
+            public class User
+        {
+            [JsonProperty("id")]
+            public string Id { get; set; }
+            [JsonProperty("ttl")]
+            public int ttl { get; set; }
+            [JsonProperty("userId")]
+            public string UserId { get; set; }
+            [JsonProperty("sdTag")]
+            public string SDTag { get; set; }
+            [JsonProperty("lastName")]
+            public string LastName { get; set; }
+            [JsonProperty("firstName")]
+            public string FirstName { get; set; }
+            [JsonProperty("email")]
+            public string Email { get; set; }
+            [JsonProperty("dividend")]
+            public string Dividend { get; set; }
+            [JsonProperty("OrderHistory")]
+            public OrderHistory[] OrderHistory { get; set; }
+            [JsonProperty("ShippingPreference")]
+            public ShippingPreference[] ShippingPreference { get; set; }
+            [JsonProperty("CouponsUsed")]
+            public CouponsUsed[] Coupons { get; set; }
+            public override string ToString()
+            {
+                return JsonConvert.SerializeObject(this);
+            }
+        }
+
+        public class OrderHistory
+        {
+            public string OrderId { get; set; }
+            public string DateShipped { get; set; }
+            public string Total { get; set; }
+        }
+
+        public class ShippingPreference
+        {
+            public int Priority { get; set; }
+            public string AddressLine1 { get; set; }
+            public string AddressLine2 { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string ZipCode { get; set; }
+            public string Country { get; set; }
+        }
+
+        public class CouponsUsed
+        {
+            public string CouponCode { get; set; }
+
+        }
 }
